@@ -14,6 +14,8 @@ class Blog extends Component {
     error: false
   };
 
+  // For every request and response we can set global functions. Also helpful to handler errors.
+  // These are called interceptors.
   componentDidMount() {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
