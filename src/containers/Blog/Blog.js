@@ -18,7 +18,7 @@ class Blog extends Component {
   // These are called interceptors.
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("/posts")
       .then((response) => {
         const posts = response.data.slice(0, 4);
         const updatedPost = posts.map((post) => {
