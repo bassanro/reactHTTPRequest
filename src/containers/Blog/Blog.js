@@ -4,7 +4,7 @@ import Post from "../../components/Post/Post";
 import FullPost from "../../components/FullPost/FullPost";
 import NewPost from "../../components/NewPost/NewPost";
 import "./Blog.css";
-import axios from "axios";
+import axiosInstance from "../../axios";
 
 // Note that axios returns a promise that can be captured via then command.
 class Blog extends Component {
@@ -17,7 +17,7 @@ class Blog extends Component {
   // For every request and response we can set global functions. Also helpful to handler errors.
   // These are called interceptors.
   componentDidMount() {
-    axios
+    axiosInstance
       .get("/posts")
       .then((response) => {
         const posts = response.data.slice(0, 4);
