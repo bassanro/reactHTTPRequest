@@ -8,15 +8,19 @@ class FullPost extends Component {
     loadedPosts: null
   };
 
-  // NOTE: This is recursive loop, since updating state inside this method will rerender the component,
-  // hence going into infiite loop. Can be checked from network console tab.
+  // Safely fetching data to update state when component updates.
   componentDidUpdate() {
     if (this.props.id) {
-      axios
-        .get("https://jsonplaceholder.typicode.com/posts/" + this.props.id)
-        .then((response) => {
-          this.setState({ loadedPosts: response.data });
-        });
+      if (
+        !this.state.loadedPosts ||
+        (this.state.loadedPosts && this.state.loadedPosts.id !== this.props.id)
+      ) {
+        axios
+          .get("https://jsonplaceholder.typicode.com/posts/" + this.props.id)
+          .then((response) => {
+            this.setState({ loadedPosts: response.data });
+          });
+      }
     }
   }
 
