@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Override the ones defined in index.js
 const instance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com"
+  baseURL: "http://jsonplaceholder.typicode.com"
 });
 
 // All files in your project

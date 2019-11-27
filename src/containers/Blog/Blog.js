@@ -2,8 +2,9 @@ import React, { Component } from "react";
 
 import "./Blog.css";
 import Posts from "../Posts/Posts";
+import { Route, Link } from "react-router-dom";
+import NewPost from "../NewPost/NewPost";
 
-// Note that axios returns a promise that can be captured via then command.
 class Blog extends Component {
   render() {
     return (
@@ -12,15 +13,28 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="/new-post">New Post</a>
+                {/* hash is like id to jump back */}
+                <Link
+                  to={{
+                    pathname: "/new-post",
+                    hash: "#submit",
+                    search: "?quick-submit=true"
+                  }}>
+                  New Post
+                </Link>
               </li>
             </ul>
           </nav>
         </header>
-        <Posts />
+        {/* 
+          <Route path="/" exact render={() => <h1>Home</h1>} />
+          <Route path="/" render={() => <h2>Home 2</h2>} />
+        */}
+        <Route path="/" exact component={Posts} />
+        <Route path="/new-post" component={NewPost} />
       </div>
     );
   }

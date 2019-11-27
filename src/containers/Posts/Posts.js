@@ -14,7 +14,9 @@ class Posts extends Component {
 
   // For every request and response we can set global functions. Also helpful to handler errors.
   // These are called interceptors.
+  // Note that axios returns a promise that can be captured via then command.
   componentDidMount() {
+    //console.log(this.props);
     axiosInstance
       .get("/posts")
       .then((response) => {
