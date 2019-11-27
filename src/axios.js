@@ -8,7 +8,7 @@ const instance = axios.create({
 // All files in your project
 instance.interceptors.request.use(
   (requestConfig) => {
-    console.log(requestConfig);
+    //console.log(requestConfig);
     return requestConfig;
   },
   (error) => {
@@ -19,7 +19,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (responseConfig) => {
-    console.log(responseConfig);
+    //console.log(responseConfig);
     return responseConfig;
   },
   (error) => {
