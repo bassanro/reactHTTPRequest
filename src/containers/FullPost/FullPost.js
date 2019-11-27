@@ -8,15 +8,15 @@ class FullPost extends Component {
     loadedPosts: null
   };
 
-  // Safely fetching data to update state when component updates.
-  componentDidUpdate() {
-    if (this.props.id) {
+  componentDidMount() {
+    console.log(this.props);
+    if (this.props.match.params.postId) {
       if (
         !this.state.loadedPosts ||
         (this.state.loadedPosts && this.state.loadedPosts.id !== this.props.id)
       ) {
         axiosInstance
-          .get("/posts/" + this.props.id)
+          .get("/posts/" + this.props.match.params.postId)
           .then((response) => {
             this.setState({ loadedPosts: response.data });
           })
