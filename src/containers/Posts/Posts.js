@@ -2,18 +2,12 @@ import React, { Component } from "react";
 import axiosInstance from "../../axios";
 import Post from "../../components/Post/Post";
 import "./Posts.css";
+import { Route } from "react-router-dom";
+import FullPost from "./../FullPost/FullPost";
 
 class Posts extends Component {
   state = {
     posts: []
-  };
-
-  postSelectedHandler = (id) => {
-    // Takes string or object. same as router link "to" property.
-    //object ->
-    // this.props.history.push({ pathname: "/" + id });
-    this.props.history.push("/posts/" + id);
-    // console.log(this.props);
   };
 
   // For every request and response we can set global functions. Also helpful to handler errors.
@@ -41,6 +35,11 @@ class Posts extends Component {
       });
   }
 
+  postSelectedHandler = (id) => {
+    // Takes string or object. same as router link "to" property.
+    this.props.history.push({ pathname: "/posts/" + id });
+    //this.props.history.push("/posts/" + id);
+  };
   render() {
     let posts = <p style={{ textAlign: "center" }}>Something went wrong</p>;
 
@@ -59,9 +58,11 @@ class Posts extends Component {
       });
     }
 
+    // <Route path="/posts/:PostId" component={FullPost} />
     return (
       <div>
         <section className="Posts">{posts}</section>
+        <Route path="/posts/:PostId" component={FullPost} />
       </div>
     );
   }
