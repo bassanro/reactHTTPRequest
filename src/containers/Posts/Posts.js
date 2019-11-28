@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axiosInstance from "../../axios";
 import Post from "../../components/Post/Post";
 import "./Posts.css";
-import { Link } from "react-router-dom";
 
 class Posts extends Component {
   state = {
@@ -10,14 +9,18 @@ class Posts extends Component {
   };
 
   postSelectedHandler = (id) => {
-    this.setState({ selectedPostId: id });
+    // Takes string or object. same as router link "to" property.
+    //object ->
+    // this.props.history.push({ pathname: "/" + id });
+    this.props.history.push("/posts/" + id);
+    // console.log(this.props);
   };
 
   // For every request and response we can set global functions. Also helpful to handler errors.
   // These are called interceptors.
   // Note that axios returns a promise that can be captured via then command.
   componentDidMount() {
-    console.log(this.props);
+    //console.log(this.props);
     axiosInstance
       .get("/posts")
       .then((response) => {
@@ -44,13 +47,14 @@ class Posts extends Component {
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {
         return (
-          <Link to={"/posts/" + post.id} key={post.id}>
-            <Post
-              title={post.title}
-              author={post.author}
-              clicked={() => this.postSelectedHandler(post.id)}
-            />
-          </Link>
+          // <Link to={"/posts/" + post.id} key={post.id}>
+          <Post
+            title={post.title}
+            author={post.author}
+            key={post.id}
+            clicked={() => this.postSelectedHandler(post.id)}
+          />
+          // </Link>
         );
       });
     }
