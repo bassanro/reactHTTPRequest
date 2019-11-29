@@ -11,6 +11,7 @@ class NewPost extends Component {
   };
 
   componentDidMount() {
+    //if unAuth then return to posts route.
     //console.log(this.props);
   }
 
