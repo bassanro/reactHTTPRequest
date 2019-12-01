@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 
 import "./Blog.css";
 import Posts from "../Posts/Posts";
@@ -9,6 +9,9 @@ import asyncComponent from "../../hoc/asyncComponent";
 const AsyncPost = asyncComponent(() => {
   return import("..//NewPost/NewPost");
 });
+
+// here names exports are not support for lazy
+const Post = React.lazy(() => import("../NewPost/NewPost"));
 
 class Blog extends Component {
   state = {
@@ -51,7 +54,14 @@ class Blog extends Component {
           {this.state.auth ? (
             <Route path="/new-post" component={AsyncPost} />
           ) : null}
-          <Route path="/posts" component={Posts} />
+          <Route
+            path="/posts"
+            render={() => (
+              <Suspense fallback={<div>Loading...</div>}>
+                <Post />{" "}
+              </Suspense>
+            )}
+          />
           <Route path="/" component={Posts} />
           <Route render={() => <h1>Page not Found</h1>} />
           {/* <Redirect from="/" to="/posts" /> */}
